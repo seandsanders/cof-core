@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/dashboard">
+              <a class="navbar-brand" href="/">
                 <img class="hidden-xs" alt="Catastrophic Overview Failure" src="/static/img/logo.png">
                 <img class="visible-xs" alt="Catastrophic Overview Failure" src="/static/img/logo-small.png">
               </a>
@@ -37,7 +37,11 @@
                 <li {% if current_page == "landing" %}class="active"{% endif %}><a href="/">Home</a></li>
                 <li {% if current_page == "about" %}class="active"{% endif %}><a href="/">About COF</a></li>
                 <li {% if current_page == "application" %}class="active"{% endif %}><a href="/">Application</a></li>
-                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="/">Member Login</a></li>
+                {% if not user.is_authenticated %}
+                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="{% url 'core:evesso' %}">Member Login</a></li>
+                {% else %}
+                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="{% url 'core:dashboard' %}">Members</a></li>
+                {% endif %}
                 {% endwith %}
               </ul>
             </div>
