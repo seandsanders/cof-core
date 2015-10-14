@@ -1,0 +1,125 @@
+body {
+  background: url('/static/img/bg1.png') no-repeat center center fixed, #080808;
+  background-clip: border-box;
+  font-size:12px;
+}
+
+a {
+  color:#BEAD75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+/* nav */
+
+#navbar-wrapper {
+  margin:0 auto;
+  max-width:1000px;
+}
+
+.navbar-toggle {
+  margin: 23px 0;
+}
+
+.navbar-nav, .navbar-nav li, .navbar-nav li a {
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar-nav li a {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    padding: 0;
+  }
+}
+
+.navbar-brand {
+  padding-top:0;
+}
+
+.navbar {
+  background: rgba(0, 0, 0, 0.5); /* for latest browsers */
+  text-transform:uppercase;
+  font-weight:bold;
+  font-size:10px;
+  border-bottom:none;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  background: url('/static/img/star-active.png') no-repeat center bottom 10px #BEAD75;
+  color: #000000;
+}
+
+@media only screen and (max-width : 992px) {
+  .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    background:transparent;
+    color: #FFFFFF;
+  }
+}
+
+/* main */
+.content-block {
+  background:white;
+  border: 1px solid black;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.top-blurb {
+  color: #FFF;
+  margin-bottom:50px;
+}
+
+.top-blurb p {
+  text-shadow: 1px 1px #000000;
+}
+
+.eve-logos {
+  margin-top:15px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+@media (min-width: 769px) {
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 107px;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 107px;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.footer .logo-bottom {
+  padding-top:10px;
+}
+
+.footer .col-md-5 {
+  padding-top: 26px;
+}
+
+@media (max-width: 768px) {
+  .col-xs-12.text-right, .col-xs-12.text-left {
+     text-align: center;
+   }
+}

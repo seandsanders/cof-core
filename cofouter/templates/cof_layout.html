@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>{{CORP_FULLNAME}}</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/outer-base.css" rel="stylesheet">
+    <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div id="navbar-wrapper">
+          <div class="container-fluid navbar-inner">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/dashboard">
+                <img class="hidden-xs" alt="Catastrophic Overview Failure" src="/static/img/logo.png">
+                <img class="visible-xs" alt="Catastrophic Overview Failure" src="/static/img/logo-small.png">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class="nav navbar-nav">
+                {% with request.resolver_match.url_name as current_page %}
+                <li {% if current_page == "landing" %}class="active"{% endif %}><a href="/">Home</a></li>
+                <li {% if current_page == "about" %}class="active"{% endif %}><a href="/">About COF</a></li>
+                <li {% if current_page == "application" %}class="active"{% endif %}><a href="/">Application</a></li>
+                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="/">Member Login</a></li>
+                {% endwith %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12 text-left">
+            <p class="text-muted">All Rights Reserved &copy; {% now "Y" %} Catastrophic Overview Failure</p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-12">
+            <img class="center-block logo-bottom" src="/static/img/logo-bottom.png"/>
+          </div>
+          <div class="col-md-5 col-sm-5 col-xs-12 text-right">
+            <p class="text-muted">IN GAME CHANNEL: CATASTROPHIC OVERVIEW FAILURE</p>
+            <p class="text-muted"><strong>CEO:</strong> Dmitrii Rosolov <strong>Recruitment: </strong>Shiv McClane</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
