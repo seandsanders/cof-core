@@ -1,0 +1,2 @@
+recursive-include cofouter/static *
+recursive-include cofouter/templates *
