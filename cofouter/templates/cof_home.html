@@ -27,7 +27,21 @@
         <h4>Latest video:</h4>
         <div id="static_video"></div>
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/R8jDRFx0YZ4" allowfullscreen></iframe>
+          <iframe id="player" class="embed-responsive-item" allowfullscreen></iframe>
+          <script>
+            function showVideo(response) {
+              if(response.items) {
+                var items = response.items;
+                if(items.length>0) {
+                  var item = items[0];
+                  var videoid = "https://www.youtube.com/embed/"+item.id.videoId;
+                  console.log("Latest ID: '"+videoid+"'");
+                  $('#player').attr("src", videoid);
+                }
+              }
+            }
+          </script>
+          <script src="https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UC_JFB7Bf_XH5hw3k7_WrtAQ&maxResults=1&key=AIzaSyB2mS_5wCiKcvJPvdjpw47XeOA72Ph60ho&alt=json&callback=showVideo"></script>
         </div>
 
       </div>
