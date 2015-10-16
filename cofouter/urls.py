@@ -13,8 +13,19 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
+from cofouter import views
 
 urlpatterns = [
+    url(r'^$', views.landing, name="landing"),
+    url(r'^register/$', views.register, name="register"),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^applications/', include('applications.urls', namespace='applications')),
+    url(r'^srp/', include('srp.urls', namespace='srp')),
+    url(r'^reddit/', include('subreddit.urls', namespace='subreddit')),
+    url(r'^hipchat/', include('hipchat.urls', namespace='hipchat')),
+    url(r'^timerboard/', include('timerboard.urls', namespace='timerboard')),
+    url(r'^corpmarket/', include('corpmarket.urls', namespace="corpmarket")),
+    url(r'^', include('core.urls', namespace='core')),
 ]

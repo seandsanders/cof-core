@@ -1,7 +1,8 @@
 body {
-  background: url('/static/img/bg1.png') no-repeat center center fixed, #080808;
+  background: url('/static/img/page-bg6.png') no-repeat center center fixed, #080808;
   background-clip: border-box;
   font-size:12px;
+  background-size: cover;
 }
 
 a {
@@ -52,9 +53,15 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom:none;
 }
 
-.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav:hover>.active>a:hover,
+  .navbar-inverse .navbar-nav:hover>li>a:hover{
   background: url('/static/img/star-active.png') no-repeat center bottom 10px #BEAD75;
   color: #000000;
+}
+
+.navbar-inverse .navbar-nav:hover>.active>a {
+  color: #9d9d9d;
+  background-color: transparent;
 }
 
 @media only screen and (max-width : 992px) {
@@ -65,7 +72,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* main */
-.content-block {
+
+.content-top {
+  color:#FFFFFF;
+  background: rgba(0, 0, 0, 0.5);
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.content-bottom {
   background:white;
   border: 1px solid black;
   padding-top:10px;
@@ -82,7 +97,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .eve-logos {
-  margin-top:15px;
+  margin-top:20px;
+}
+
+#cof-videos div.embed-responsive {
+  margin-bottom:8px;
 }
 
 /* Sticky footer styles
@@ -122,4 +141,15 @@ h1, h2, h3, h4, h5, h6 {
   .col-xs-12.text-right, .col-xs-12.text-left {
      text-align: center;
    }
+}
+
+/* Register */
+.characters .thumbnail {
+  width: 128px;
+  display: inline-block;
+  color:#000000;
+}
+
+.characters .mainChar {
+  background-color:#BEAD75;
 }
