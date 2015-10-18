@@ -38,10 +38,10 @@
                 <li {% if current_page == "about" %}class="active"{% endif %}><a href="/">About COF</a></li>
                 <li {% if current_page == "application" %}class="active"{% endif %}><a href="/">Application</a></li>
                 {% if not user.is_authenticated %}
-                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="{% url 'core:evesso' %}">Member Login</a></li>
-                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="{% url 'register' %}">Register</a></li>
+                <li {% if current_page == "core:evesso" %}class="active"{% endif %}><a href="{% url 'core:evesso' %}">Member Login</a></li>
+                <li {% if current_page == "register" %}class="active"{% endif %}><a href="{% url 'register' %}">Register</a></li>
                 {% else %}
-                <li {% if current_page == "cof-login" %}class="active"{% endif %}><a href="{% url 'core:dashboard' %}">Dashboard</a></li>
+                <li {% if current_page == "core:dashboard" %}class="active"{% endif %}><a href="{% url 'core:dashboard' %}">Dashboard</a></li>
                 {% endif %}
                 {% endwith %}
               </ul>
@@ -54,10 +54,10 @@
     <div class="container">
       <div class="row top-blurb">
         <div class="col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6">
-          <h4>Catastrophic Overview Failure</h4>
+          <h5 class="future-earth">Catastrophic Overview Failure</h5>
           <p>Welcome to COF Local, Catastrophic Overview Failure's official website.</p>
           <p>Catastrophic Overview Failure is the Brave Collective's premier new-player friendly wormhole corporation. We pride ourselves on our newbie friendliness and low-SP doctrines. We accept pilots with low and high SP, with high or low game experience and from any timezone. For more information, check out <a href="#">ABOUT COF</a>.</p>
-          <p>If you are here for diplomatic reasons, contact Tobil Tobir in-game.</p>
+          <p>If you are here for diplomatic reasons, contact <a href="https://zkillboard.com/kill/47631291/">Tobil Tobir</a> in-game.</p>
         </div>
       </div>
       <div class="row content-top">

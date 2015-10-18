@@ -1,3 +1,11 @@
+@font-face {
+  local('Future Earth');
+  local('Future-Earth');
+  font-family: "Future Earth";
+  src: url('/static/font/Future-Earth.ttf');
+  format('truetype');
+}
+
 body {
   background: url('/static/img/page-bg6.png') no-repeat center center fixed, #080808;
   background-clip: border-box;
@@ -12,6 +20,14 @@ a {
 h1, h2, h3, h4, h5, h6 {
   text-transform:uppercase;
   font-weight:bold;
+}
+
+.future-earth {
+  font-family: "Future Earth", Helvetica, Arial, sans-serif;
+}
+
+p {
+  text-align: justify;
 }
 
 /* nav */
@@ -62,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-inverse .navbar-nav:hover>.active>a {
   color: #9d9d9d;
   background-color: transparent;
+  background-image:none;
 }
 
 @media only screen and (max-width : 992px) {
@@ -90,10 +107,11 @@ h1, h2, h3, h4, h5, h6 {
 .top-blurb {
   color: #FFF;
   margin-bottom:50px;
+  text-shadow: 2px 2px #000000;
 }
 
-.top-blurb p {
-  text-shadow: 1px 1px #000000;
+.top-blurb h5{
+  line-height:20px;
 }
 
 .eve-logos {
