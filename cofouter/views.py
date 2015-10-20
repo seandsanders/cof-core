@@ -26,7 +26,12 @@ def register(request):
     ctx = {}
     error = None
     recruiterGrp, created = Group.objects.get_or_create(name='Recruiter')
-    if request.method == "POST":
+
+    if request.session.get('sso_error'):
+        del request.session['sso_error']
+        error = 'The selected Character is not in our Database. Please register using the link below.'
+
+    elif request.method == "POST":
         if request.POST.get("action") == "addkey":
             if request.POST.get("keyID") and request.POST.get("vCode"):
                 if int(request.POST.get("keyID")) > settings.MIN_API_ID:
@@ -146,4 +151,5 @@ def ssologin(request):
                 return redirect("applications:apply", token=token)
             return redirect("core:dashboard")
         except:
-            return render(request, 'cof_register.html', {"error": "The selected Character is not in our Database. Please register using the link below."})
+            request.session['sso_error'] = True
+            return redirect(reverse('register'))
