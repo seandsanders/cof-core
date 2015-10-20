@@ -93,7 +93,7 @@ ul.star {
 }
 
 .navbar {
-  background: rgba(0, 0, 0, 0.5); /* for latest browsers */
+  background: #050505;
   text-transform:uppercase;
   font-weight:bold;
   font-size:10px;
