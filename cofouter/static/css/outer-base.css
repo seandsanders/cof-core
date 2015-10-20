@@ -11,6 +11,13 @@ body {
   background-clip: border-box;
   font-size:14px;
   background-size: cover;
+  padding-top: 90px;
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+  body {
+    padding-top:140px;
+  }
 }
 
 a {
