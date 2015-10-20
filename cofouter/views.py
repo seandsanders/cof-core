@@ -1,7 +1,13 @@
+import json
+from urllib import urlencode
+from urllib2 import urlopen, Request as urlrequest
+import urllib2
 from django.conf import settings
+from django.contrib.auth import login
 from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
+from base64 import b64encode as base64
 from django.utils.text import slugify
 from core import postNotification
 from core.apireader import validateKey, refreshKeyInfo
@@ -50,7 +56,7 @@ def register(request):
                     try:
                         newUser.save()
                     except IntegrityError as e:
-                        return redirect("core:evesso")
+                        return redirect("evesso")
 
                     newProfile = UserProfile.objects.get_or_create(user=newUser)[0]
                     try:
@@ -74,7 +80,7 @@ def register(request):
                         pass
                     postNotification(target=newUser, text="You have created your account", cssClass="success")
                     postNotification(target=recruiterGrp, text="<a href='"+reverse('core:playerProfile', kwargs={"profileName": slugify(newProfile)})+"'>"+unicode(newProfile)+"</a> created an account.", cssClass="info")
-                    return redirect("core:evesso")
+                    return redirect("evesso")
                 else:
                     error = "Please Select your main Character (click it)"
             else:
@@ -90,3 +96,54 @@ def register(request):
 def about(request):
     ctx = {}
     return render(request, 'cof_about.html', ctx)
+
+
+def ssologin(request):
+    code = request.GET.get('code', None)
+
+    clientid = settings.SSO_CLIENT_ID
+    clientkey = settings.SSO_SECRET_KEY
+    authorization = base64(clientid+":"+clientkey)
+    redirect_url = settings.SSO_CALLBACK_URL
+
+
+    if not code:
+        base = "https://login.eveonline.com/oauth/authorize/?response_type=code"
+        url = base + "&redirect_uri=" + redirect_url + "&client_id=" + clientid + "&scope="
+
+        return redirect(url)
+    else:
+        data = {"grant_type": "authorization_code", "code": code}
+        headers = {"Authorization": authorization}
+
+        data = urlencode(data)
+        rq = urlrequest("https://login.eveonline.com/oauth/token", data, headers)
+
+        try:
+            result = urlopen(rq)
+            result = json.loads(result.read())
+        except urllib2.HTTPError, e:
+            r = e.read()
+            return render(request, 'cof_register.html', {"error": "Your Login Token is invalid or expired. Please try again."})
+
+        headers = {"Authorization": "Bearer " + result["access_token"], "Host": "login.eveonline.com"}
+
+        rq = urlrequest("https://login.eveonline.com/oauth/verify", headers=headers)
+        result = urlopen(rq)
+        result = result.read()
+
+        result = json.loads(result)
+
+        if not result["CharacterID"]:
+            return render(request, 'cof_register.html', {"error": "Cannot get a valid answer from CCP. Please try again."})
+
+        try:
+            char = Character.objects.get(charID=result["CharacterID"])
+            char.profile.user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, char.profile.user)
+            token = request.session.get('appToken', False)
+            if token:
+                return redirect("applications:apply", token=token)
+            return redirect("core:dashboard")
+        except:
+            return render(request, 'cof_register.html', {"error": "The selected Character is not in our Database. Please register using the link below."})
