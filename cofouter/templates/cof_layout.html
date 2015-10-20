@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/static/favicon.ico">
 
     <title>{{CORP_FULLNAME}}</title>
 
@@ -35,11 +35,10 @@
               <ul class="nav navbar-nav">
                 {% with request.resolver_match.url_name as current_page %}
                 <li {% if current_page == "landing" %}class="active"{% endif %}><a href="/">Home</a></li>
-                <li {% if current_page == "about" %}class="active"{% endif %}><a href="/">About COF</a></li>
-                <li {% if current_page == "application" %}class="active"{% endif %}><a href="/">Application</a></li>
+                <li {% if current_page == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About COF</a></li>
                 {% if not user.is_authenticated %}
                 <li {% if current_page == "core:evesso" %}class="active"{% endif %}><a href="{% url 'core:evesso' %}">Member Login</a></li>
-                <li {% if current_page == "register" %}class="active"{% endif %}><a href="{% url 'register' %}">Register</a></li>
+                <li {% if current_page == "register" %}class="active"{% endif %}><a href="{% url 'register' %}">Register/Apply</a></li>
                 {% else %}
                 <li {% if current_page == "core:dashboard" %}class="active"{% endif %}><a href="{% url 'core:dashboard' %}">Dashboard</a></li>
                 {% endif %}
@@ -56,25 +55,25 @@
         <div class="col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6">
           <h5 class="future-earth">Catastrophic Overview Failure</h5>
           <p>Welcome to COF Local, Catastrophic Overview Failure's official website.</p>
-          <p>Catastrophic Overview Failure is the Brave Collective's premier new-player friendly wormhole corporation. We pride ourselves on our newbie friendliness and low-SP doctrines. We accept pilots with low and high SP, with high or low game experience and from any timezone. For more information, check out <a href="#">ABOUT COF</a>.</p>
+          <p>Catastrophic Overview Failure is the Brave Collective's premier new-player friendly wormhole corporation. We pride ourselves on our newbie friendliness and low-SP doctrines. We accept pilots with low and high SP, with high or low game experience and from any timezone. For more information, check out <a href="{% url 'about' %}">ABOUT COF</a>.</p>
           <p>If you are here for diplomatic reasons, contact <a href="https://zkillboard.com/kill/47631291/">Tobil Tobir</a> in-game.</p>
         </div>
       </div>
-      <div class="row content-top">
+      <div class="row content-top flex-center">
         {% block content-top %}
-        <div class="col-md-4 col-sm-4">
+        <div class="col-md-4 col-sm-6">
           <h3>Welcome</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          <p>COF offers a variety of wormhole based, PvP-focused activities for Eve Online players. C5 fleets, low sec and null sec roams, small gang hunting, evictions, along with a generous SRP program for our members.</p>
+          <p>We’re looking for like-minded players to come blap and welp gloriously as is the will of Bob.</p>
         </div>
-        <div class="col-md-2 col-sm-2">
-          <img class="center-block" src="/static/img/eve-racial-logos.png"/>
-        </div>
-        <div class="col-md-4 col-sm-4">
-          <h1>Something should go here</h1>
-        </div>
-        <div class="col-md-2 col-sm-2">
-          <img class="center-block eve-logos" src="/static/img/brave-eve-combined-white.png"/>
+        <div class="col-md-8 col-sm-6 flex-center flex-sm-vcenter">
+          <img class="hidden-sm hidden-xs" src="/static/img/eve-racial-logos.png"/>
+          <a class= "img-responsive" href="{% url 'register' %}"><img src="/static/img/btn-apply.png"/></a>
+          <a class= "img-responsive" href="{% url 'core:evesso' %}"><img src="/static/img/btn-members.png"/></a>
+          <img class="eve-logos hidden-sm hidden-xs" src="/static/img/brave-eve-combined-white.png" usemap="#eve-logos-map"/>
+          <map name="eve-logos-map" id="eve-logos-map">
+            <area  alt="" title="" href="http://www.eveonline.com/" shape="rect" coords="0,98,92,133" style="outline:none;" target="_blank" />
+          </map>
         </div>
         {% endblock %}
       </div>
@@ -92,7 +91,7 @@
           </div>
           <div class="col-md-5 col-sm-5 col-xs-12 text-right">
             <p class="text-muted">IN GAME CHANNEL: CATASTROPHIC OVERVIEW FAILURE</p>
-            <p class="text-muted"><strong>CEO: </strong><a href="https://zkillboard.com/kill/49167226/">Dmitrii Rosolov</a> <strong>Recruitment: </strong><a href="https://zkillboard.com/kill/45915143/">Shiv McClane</a></p>
+            <p class="text-muted"><strong>CEO: </strong><a href="https://zkillboard.com/kill/49167226/">Dmitrii Rosolov</a> <strong>Recruitment: </strong><a href="https://zkillboard.com/kill/45915143/">Shiv McClane</a> or <a href="https://zkillboard.com/kill/45711227/">Lazaris Praetor</a></p>
           </div>
         </div>
       </div>

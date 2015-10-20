@@ -13,6 +13,7 @@ def landing(request):
     context = {}
     return render(request, 'cof_home.html', context)
 
+
 def register(request):
     if False:
         return views.register(request)
@@ -84,3 +85,8 @@ def register(request):
         ctx["characters"] = request.session.get("characters")
     ctx["error"] = error
     return render(request, 'cof_register.html', ctx)
+
+
+def about(request):
+    ctx = {}
+    return render(request, 'cof_about.html', ctx)

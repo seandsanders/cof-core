@@ -1,0 +1,82 @@
+{% extends 'cof_layout.html' %}
+
+
+{% block content-top %}
+  <div class="col-md-4 col-sm-6">
+    <h3>Welcome</h3>
+    <p>COF offers a variety of wormhole based, PvP-focused activities for Eve Online players. C5 fleets, low sec and null sec roams, small gang hunting, evictions, along with a generous SRP program for our members.</p>
+    <p>We’re looking for like-minded players to come blap and welp gloriously as is the will of Bob.</p>
+  </div>
+  <div class="col-md-8 col-sm-6 flex-center flex-sm-vcenter">
+    <img class="hidden-sm hidden-xs" src="/static/img/eve-racial-logos.png"/>
+    <a class= "img-responsive" href="{% url 'register' %}"><img src="/static/img/btn-apply.png"/></a>
+    <a class= "img-responsive" href="{% url 'core:evesso' %}"><img src="/static/img/btn-members.png"/></a>
+    <img class="eve-logos hidden-sm hidden-xs" src="/static/img/brave-eve-combined-white.png" usemap="#eve-logos-map"/>
+    <map name="eve-logos-map" id="eve-logos-map">
+      <area  alt="" title="" href="http://www.eveonline.com/" shape="rect" coords="0,98,92,133" style="outline:none;" target="_blank" />
+    </map>
+  </div>
+{% endblock %}
+
+{% block content-bottom %}
+  <div class="col-md-8 col-sm-12">
+    <h4>Catastrophic Overview Failure</h4>
+    <p>Catastrophic Overview Failure is the BRAVE Collective's premier new-pilot friendly wormhole corporation.</p>
+    <h4>What Does Catastrophic Overview Failure Do?</h4>
+    <p>We take new and old pilots into the depths of Wormhole space to teach them the intricacies of living in a wormhole. From not talking in local to scanning a chain, we'll walk you through every step of the way. We mainly focus on PvP, but we also do PvE fleets and large wormhole battles from time to time!</p>
+    <p>We are an open and welcoming community of pirates, cut-throats, assassins, renegades and oxymorons who are constantly looking for fresh blood to keep our glorious welping machine of lossmails running. We like to keep an open and fun-oriented atmosphere in TeamSpeak and in-game, but we try to be serious when it matters. We try to improve and do well in fights while keeping the light-hearted atmosphere that we love. We are a small community, which means you can get to know people beyond just their voice.</p>
+    <p>Whether you are new to wormhole space or a veteran to it, whether you are looking to learn to PvP or an expert at it, COF is the place for you!</p>
+    <p>List of Activities:</p>
+    <ul class="star">
+      <li>PvP Fleets (small, medium, serious and fun)</li>
+      <li>PvE Fleets (C3, C5, Gas)</li>
+      <li>Ganking</li>
+      <li>Having Fun</li>
+      <li>Cloaky Roams (Gotta be sneaky)</li>
+      <li>Carrier Hunting</li>
+      <li>Thunderdomes</li>
+      <li>Shotgun Roams</li>
+    </ul>
+    <h4>An average day in COF:</h4>
+    <div class="embed-responsive embed-responsive-16by9"><iframe id="player" class="embed-responsive-item" allowfullscreen src="https://www.youtube.com/embed/PmNcTS-MuSc"></iframe></div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+    <h4>Who Leads Catastrophic Overview Failure?</h4>
+    <table class="table ">
+      <thead>
+        <tr>
+          <th>In-Game Name</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dmitrii Rosolov</td>
+          <td>CEO</td>
+        </tr>
+        <tr>
+          <td>Kegen Vyvorant</td>
+          <td>HR Director</td>
+        </tr>
+        <tr>
+          <td>Tobil Tobyr</td>
+          <td>Diplomatics Director</td>
+        </tr>
+        <tr>
+          <td>IRDJ</td>
+          <td>Military Director</td>
+        </tr>
+        <tr>
+          <td>Shiv McClane</td>
+          <td>Recruiter</td>
+        </tr>
+        <tr>
+          <td>Lazaris Praetor</td>
+          <td>Recruiter</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>How Can I Join?</h4>
+    <p>COF has no SP requirement to join. We do, however, expect our members to have an interest in, and (at least try to) participate in PvP content. To be effective in COF, we recommend you can fly at least a scanning ship (T1 is fine) and know how to scan a little bit. If you don't, give it a shot and we can teach you all you need to know! Join the “catastrophic overview failure” public channel if you have questions, or <a href="{% url 'register' %}">apply now</a>!</p>
+  </div>
+{% endblock %}

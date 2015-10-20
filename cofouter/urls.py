@@ -20,6 +20,7 @@ from cofouter import views
 urlpatterns = [
     url(r'^$', views.landing, name="landing"),
     url(r'^register/$', views.register, name="register"),
+    url(r'^about/$', views.about, name="about"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^applications/', include('applications.urls', namespace='applications')),
     url(r'^srp/', include('srp.urls', namespace='srp')),
