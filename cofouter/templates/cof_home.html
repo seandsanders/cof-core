@@ -21,7 +21,7 @@
           var items = response.items;
           if(items.length>0) {
             $(items).each(function(idx, item){
-              var videoid = "https://www.youtube.com/embed/"+item.id.videoId;
+              var videoid = "https://www.youtube.com/embed/"+item.snippet.resourceId.videoId;
               console.log("Latest ID: '"+videoid+"'");
               var frame = $('<div class="embed-responsive embed-responsive-16by9"><iframe id="player" class="embed-responsive-item" allowfullscreen src="' + videoid + '"></iframe></div>');
               $('#cof-videos').append(frame);
@@ -30,6 +30,6 @@
         }
       }
     </script>
-    <script src="https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UC_JFB7Bf_XH5hw3k7_WrtAQ&maxResults=1&key={{ YOUTUBE_API_KEY }}&alt=json&callback=showVideo"></script>
+    <script src="https://www.googleapis.com/youtube/v3/playlistItems?order=date&part=snippet&playlistId=PL7infayuHSZsJEayGnQF_6QB29_cP0qwi&maxResults=1&key={{ YOUTUBE_API_KEY }}&alt=json&callback=showVideo"></script>
   </div>
 {% endblock %}
