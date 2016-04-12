@@ -29,5 +29,7 @@ urlpatterns = [
     url(r'^hipchat/', include('hipchat.urls', namespace='hipchat')),
     url(r'^timerboard/', include('timerboard.urls', namespace='timerboard')),
     url(r'^corpmarket/', include('corpmarket.urls', namespace="corpmarket")),
+    url(r'^helpdesk/', include('helpdesk.urls', namespace="helpdesk")),
+    url(r'^skillchecker/', include('skillchecker.urls', namespace="skillchecker")),
     url(r'^', include('core.urls', namespace='core')),
 ]
