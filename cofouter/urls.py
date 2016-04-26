@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url, patterns
+from django.conf import settings
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from cofouter import views
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_nyt.urls import get_pattern as get_nyt_pattern
 
 urlpatterns = [
     url(r'^$', views.landing, name="landing"),
@@ -31,5 +35,16 @@ urlpatterns = [
     url(r'^corpmarket/', include('corpmarket.urls', namespace="corpmarket")),
     url(r'^helpdesk/', include('helpdesk.urls', namespace="helpdesk")),
     url(r'^skillchecker/', include('skillchecker.urls', namespace="skillchecker")),
+    url(r'^wikinotifications/', get_nyt_pattern()),
+    url(r'^wiki/', get_wiki_pattern()),
     url(r'^', include('core.urls', namespace='core')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += patterns('',
+                            url(r'^media/(?P<path>.*)$',
+                                'django.views.static.serve',
+                                {'document_root': settings.MEDIA_ROOT,
+                                 }),
+                            )
