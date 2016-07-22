@@ -1,0 +1,22 @@
+{% extends "..//base.html" %}
+{% load i18n wiki_tags sekizai_tags %}
+
+{% block wiki_pagetitle %}{% trans "Log in" %}{% endblock %}
+
+{% block wiki_contents %}
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <h1 class="page-header">{% trans "Please click below to log in" %}</h1>
+    <a href="{% url 'core:evesso' %}">Member Login</a>
+  </div>
+  <div class="col-lg-3"></div>
+</div>
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+  $('#id_username').focus();
+</script>
+{% endaddtoblock %}
+
+{% endblock %}
