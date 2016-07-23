@@ -22,16 +22,59 @@
     margin-top: 5px
 }
 
+.admonition-title {
+    font-weight: bold;
+}
+
+.success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.success hr {
+  border-top-color: #c9e2b3;
+}
+
+.success a {
+  color: #2b542c;
+}
+
+.info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.info hr {
+  border-top-color: #a6e1ec;
+}
+
+.info a {
+  color: #245269;
+}
+
 .warning {
     background-color: #fcf8e3;
     border-color: #faebcc;
     color: #8a6d3b
 }
-
 .warning hr {
     border-top-color: #f7e1b5
 }
 
 .warning a {
     color: #66512c
+}
+
+.danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.danger hr {
+  border-top-color: #e4b9c0;
+}
+.danger a {
+  color: #843534;
 }
