@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% load getapps %}
+
+{% block content %}
+ <h1 class="page-header">Profile for {{profile}}</h1>
+<div class="row dashboardHeader">
+  <img src="//image.eveonline.com/Corporation/{{ profile.mainChar.corpID }}_128.png" class="character">
+  <img src="//image.eveonline.com/Character/{{ profile.mainChar.charID }}_128.jpg" class="character">
+  <h3 class="charName">{{ profile.mainChar.charName }}</h3>
+  <span class="text-muted">{{ titles|striptags }}</span><br>
+</div>
+<div class="row">
+	<div class="col-sm-7">
+	 	<table class="table table-hover" style="display: block;">
+	 		<tr>
+	 			<th>Alt Name</th>
+	 			<th>Corporation</th>
+	 			{% if isHR %}
+	 				<th>Active Ship</th>
+	 				<th>Location</th>
+	 				<th>Jackknife</th>
+	 			{% endif %}
+	  		</tr>
+	  			{% if showSkills %}
+	  				{% for key in profile.apikey_set.all %}
+	  					<tr class="{% if not key.valid %}danger{%endif%}">
+		 					<td colspan="4" class="{% if not key.valid %}danger{% endif %}">Key {{forloop.counter}}: {{key.keyID}} : {{key.vCode}}</td>
+		 					<td><a target="_blank" href="http://ridetheclown.com/eveapi/audit.php?usid={{key.keyID}}&apik={{key.vCode}}">API</a></td>
+	  					</tr>
+	  					{% for char in key.character_set.all %}
+							<tr class="{% if not key.valid %}danger{%elif mark == char%}info{%endif%}">
+						 		<td><img src="//image.eveonline.com/Character/{{char.charID}}_32.jpg" style="vertical-align: middle; margin-right: 5px; border-radius: 3px; width: 24px; height: 24px;" title="{{char.charName}}">{{char.charName}}</td>
+						 		<td><img src="//image.eveonline.com/Corporation/{{char.corpID}}_32.png" style="vertical-align: middle; margin-right: 5px; border-radius: 3px; width: 24px; height: 24px;" title="{{char.corpName}}">{{char.corpName}}</td>
+						 		{% if isHR %}
+						 			<td>{{char.activeShipTypeName}} ({{char.activeShipName}})</td>
+						 			<td>{{char.location}}</td>
+						 			<td><a target="_blank" href="http://ridetheclown.com/eveapi/audit.php?chid={{char.charID}}&usid={{char.api.keyID}}&apik={{char.api.vCode}}">API</a></td>
+						 		{% endif %}
+						 	</tr>	  
+						 {%endfor%}					
+	  				{% endfor %}
+	  			{% else %}
+		 			{% for char in profile.character_set.all %}
+						<tr class="{%if mark == char%}info{%endif%}">
+					 		<td><img src="//image.eveonline.com/Character/{{char.charID}}_32.jpg" style="vertical-align: middle; margin-right: 5px; border-radius: 3px; width: 24px; height: 24px;" title="{{char.charName}}">{{char.charName}}</td>
+					 		<td><img src="//image.eveonline.com/Corporation/{{char.corpID}}_32.png" style="vertical-align: middle; margin-right: 5px; border-radius: 3px; width: 24px; height: 24px;" title="{{char.corpName}}">{{char.corpName}}</td>
+					 		{% if isHR %}
+					 			<td>{{char.activeShipTypeName}} ({{char.activeShipName}})</td>
+					 			<td>{{char.location}}</td>
+					 			<td><a target="_blank" href="http://ridetheclown.com/eveapi/audit.php?chid={{char.charID}}&usid={{char.api.keyID}}&apik={{char.api.vCode}}">API</a></td>
+					 		{% endif %}
+					 	</tr>
+		 		 	{% endfor %}
+	 		 	{%endif%}
+	 	</table>
+ 	</div>
+ 	<div class="col-sm-2">
+ 		<h4>Timezone:</h4>
+ 		{% if profile.tzoffset %}
+	 		<span><strong>User's TZ:</strong> UTC{%if profile.tzoffset > 0%}+{%endif%}{{profile.tzoffset}}</span><br>
+	 		<span><strong>User's local time:</strong> <span class="localtime"></span></span>
+	 	{% else %}
+	 		<span>Timezone information will be saved the next time this User logs in.</span>
+	 	{% endif %}
+ 		<hr>
+ 		<form method="post" action="">
+		    <table class="table table-bordered">
+		    	<tr>
+		    		<th>Groups</th>
+		    		{% if isDirector %}
+		    			<th></th>
+		    		{% endif %}
+				</tr>
+				{% for grp in grouplist %}
+
+					<tr>
+						<td>{{grp.name}}</td>
+						{% if isDirector %}
+							<td><input name="{{grp.name|slugify}}" {% if grp.checked %}checked="checked"{% endif %} type="checkbox"></td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</table>
+	    	{% if isDirector %}
+	    		{% csrf_token %}
+	    		<td colspan="2"><button value="1" name="updategroups" type="submit">Save Changes</button></td>
+	    	{% endif %}
+	    </form>
+ 	</div>
+ </div>
+<hr>
+{% if showSkills %}
+	<div class="row">
+		<div class="col-lg-6">
+			<h4>Flyable Ships:</h4>
+			{% for group in ships %}
+				<div class="col-sm-3">
+					<h5>{{group.group}}</h5>
+					{% for ship in group.ships %}
+						{% if ship.pilots %}
+							<strong><img src="https://image.eveonline.com/Type/{{ship.shipID}}_32.png"> {{ship.name}}</strong><br>{{ship.pilots|join:"<br>"}}<hr>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+		<div class="col-lg-6">
+			<select class="form-control  skillplandropdown">
+				{% for char in profile.character_set.all %}
+					<option {% if char == profile.mainChar %}selected="true"{% endif %} value="{{char.charID}}">{{char.charName}}</option>
+				{% endfor %}
+			</select>
+			<div class="skillplans">
+        <h5><a href="{{ STATIC_URL }}/etc/COF Skill Plans v3.1.2.pdf">Skillplan Guide</a></h5>
+        <h5><a href="{{ STATIC_URL }}/etc/COF Skill Plans 3.1.2.epb">Download Evemon Skillplans</a></h5>
+				{% skillplans profile.mainChar %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+ {% endblock content %}
+
+{% block title %}{{profile}} - {{CORP_FULLNAME}}{%endblock title%}
+
+ {% block scripts %}
+ 	<script>
+		$('body').on('click', '.skillplantoggle', function () {
+
+			$(this).parent().nextAll('div.missingskills').first().toggle();
+		});
+
+		$('.skillplandropdown').change(function() {
+			$('div.skillplans').html("<br><small>Loading...</small>");
+			$.get('/applications/checkplan/'+$(this).val(), function (r) {
+				$('div.skillplans').html(r);
+			})
+		})
+		{% if profile.tzoffset %}
+	    updateProfileClocks = function () {
+	      localtime = moment().utc().add({{profile.tzoffset}}, "hours").format("HH:mm")
+	      $('.localtime').text(localtime)
+	    }
+	    iv = setInterval(updateProfileClocks, 10000)
+	    updateProfileClocks()
+	    {% endif %}
+	</script>
+ {% endblock scripts %}
