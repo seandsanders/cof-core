@@ -91,10 +91,10 @@
 <hr>
 {% if showSkills %}
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<h4>Flyable Ships:</h4>
 			{% for group in ships %}
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 					<h5>{{group.group}}</h5>
 					{% for ship in group.ships %}
 						{% if ship.pilots %}
@@ -104,7 +104,7 @@
 				</div>
 			{% endfor %}
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-4">
 			<select class="form-control  skillplandropdown">
 				{% for char in profile.character_set.all %}
 					<option {% if char == profile.mainChar %}selected="true"{% endif %} value="{{char.charID}}">{{char.charName}}</option>
